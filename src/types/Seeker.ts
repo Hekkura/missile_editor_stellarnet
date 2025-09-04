@@ -23,6 +23,7 @@ export interface MissileSeekerDesc {
   isMeasurePos: 'Yes' | 'No' | 'Direction Only'
   isMeasureVel: 'Yes' | 'No'
   isValMem: 'No' | number
+  factions: 'ANS' | 'OSP' | 'all'
 }
 
 export interface MissileSeekerShort {
