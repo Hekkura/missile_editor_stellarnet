@@ -9,8 +9,17 @@
   src: local('BOMBARD_'), url('BOMBARD_.ttf');
 }
 
+@font-face {
+  font-family: 'Aces07';
+  font-style: normal;
+  font-display: swap;
+  src: local('ACES07_Regular'), url('ACES07_Regular.ttf');
+}
+
 @theme {
   --font-neb: 'Bombardier', sans-serif;
+  --font-aces: 'Aces07', sans-serif;
+  --yellow-pale: #e3dc98;
 }
 
 /* 

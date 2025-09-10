@@ -3,6 +3,7 @@ export interface MissileBody {
   name: string
   descriptionShort: string
   description: string
+  size: number
 
   baseHealth: number
   wallThickness: number
