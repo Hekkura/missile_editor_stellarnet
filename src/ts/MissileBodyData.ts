@@ -17,12 +17,19 @@ export const missileBodyData: MissileBody[] = [
     wallThickness: 0.05,
     socketWeight: 0.33,
     totalSocketCount: 9,
-    engineMaxSocketCount: 5,
-    warheadMaxSocketCount: 4,
+    engineMaxSocketCount: 8,
+    warheadMaxSocketCount: 6,
 
     fixedSocketCostMult: 1,
     varSocketCostMult: 1,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 0,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'All',
     loreBlurb: `Very rare to see such a specialized weapon from the OSP, let alone something the Alliance still uses considering the state of the sector. Overall, generally effective light missile, means you'll see it deployed in spades as a result. The engine is as basic as you can get so it's a little more demanding on fuel but aside from sprint missiles, you won't really be able to match a Balestra in speed and accuracy. 
     
     Filling the tank with just enough fuel to cover its usual mission profile - the Riposte - means these typically have a life expectancy of seconds since a decent hit or two from a Defender or otherwise will just vaporize it, but any self-respecting Spacer knows that.
@@ -48,6 +55,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 0.75,
     varSocketCostMult: 1,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 0,
+    multifunctionSlots: 1,
+    warheadAsSupportSlot: 'Yes',
+
+    factions: 'All',
     loreBlurb: '',
   },
   {
@@ -69,6 +83,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 1,
     varSocketCostMult: 1,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 0,
+    multifunctionSlots: 1,
+    warheadAsSupportSlot: 'Yes',
+
+    factions: 'All',
     loreBlurb:
       'Designed for siege warfare and fleet engagements, the Pilum is a terror to any unshielded vessel caught in its slow but inevitable path.',
   },
@@ -91,6 +112,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 1,
     varSocketCostMult: 1,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 1,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'ANS',
     loreBlurb:
       'Cyclones are often fielded in smaller numbers due to their cost, but each one packs enough punch to cripple a destroyer.',
   },
@@ -113,6 +141,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 1.3,
     varSocketCostMult: 1.25,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 1,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'ANS',
     loreBlurb: '',
   },
   {
@@ -134,6 +169,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 0.9,
     varSocketCostMult: 1.1,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 1,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'OSP',
     loreBlurb:
       'Containers are considered inefficient against armored targets but devastating against light craft and fleets that cluster together.',
   },
@@ -156,6 +198,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 1.1,
     varSocketCostMult: 1.3,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 1,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'Support Only',
+
+    factions: 'OSP',
     loreBlurb:
       'Expensive to produce, but highly effective at bypassing point-defense networks due to the intelligent dispersal pattern.',
   },
@@ -178,6 +227,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 0.8,
     varSocketCostMult: 0.9,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 1,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'All',
     loreBlurb:
       'Often used as an interceptor missile, the Typhoon is notorious for its short range but unmatched closing speed.',
   },
@@ -200,6 +256,13 @@ export const missileBodyData: MissileBody[] = [
     fixedSocketCostMult: 0.7,
     varSocketCostMult: 0.8,
 
+    baseBodyCost: 0,
+    seekerSlots: 1,
+    supportSlots: 0,
+    multifunctionSlots: 0,
+    warheadAsSupportSlot: 'No',
+
+    factions: 'All',
     loreBlurb: '',
   },
 ]

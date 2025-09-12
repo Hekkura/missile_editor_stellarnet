@@ -16,5 +16,12 @@ export interface MissileBody {
   fixedSocketCostMult: number
   varSocketCostMult: number
 
+  baseBodyCost: number
+  seekerSlots: number
+  supportSlots: number
+  multifunctionSlots: number
+  warheadAsSupportSlot: 'Yes' | 'No' | 'Support Only'
+
   loreBlurb: string
+  factions: 'ANS' | 'OSP' | 'All'
 }

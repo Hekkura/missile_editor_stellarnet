@@ -1,11 +1,65 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue'
-import type { MissileBody } from '@/types/Body'
+import { defineProps, defineEmits } from 'vue'
 
+//Define Item Type that can be inside the list
+//MUST have designation, name, and descriptionShort as keys.
+//Note : just use type: any but data must have those 3 keys.
+// interface BaseListItem {
+//   designation: string
+//   name: string
+//   descriptionShort: string
+//   //Extra keys that doesn't matter
+//   [key: string]: any
+// }
+
+//Props
 const props = defineProps<{
-  missileBodyData: MissileBody[]
+  listData: any[]
+  activeItem: any | null
+}>()
+//Emit events
+const emit = defineEmits<{
+  itemSelected: [item: any]
+  itemDeselected: []
 }>()
 
-const emit = defineEmits<{}>()
+//FUnctions
+const handleItemClick = (item: any) => {
+  if (props.activeItem === item) {
+    emit('itemDeselected')
+  } else {
+    emit('itemSelected', item)
+  }
+}
 </script>
-<template></template>
+<template>
+  <div class="border-1 border-neutral-400 overflow-y-scroll">
+    <div
+      v-for="listItem in props.listData"
+      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-800 border-neutral-500 border-[1.5px] text-neutral-300 hover:border-orange-500 hover:bg-neutral-900"
+      @click="handleItemClick(listItem)"
+      :class="{
+        'border-orange-500 bg-neutral-900': props.activeItem?.designation === listItem.designation,
+      }"
+    >
+      <h1 class="text-lg leading-none">{{ listItem.designation }} {{ listItem.name }}</h1>
+      <p class="font-aces text-sm tracking-tight leading-none opacity-70">
+        {{ listItem.descriptionShort }}
+      </p>
+    </div>
+  </div>
+  <div>
+    <!-- Save to Pinia state -->
+    <button
+      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-neutral-500 border-[1.5px] text-lg text-neutral-300"
+    >
+      SELECT
+    </button>
+    <!-- Close modal -->
+    <button
+      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-rose-800 border-[1.5px] text-lg text-rose-800"
+    >
+      CANCEL
+    </button>
+  </div>
+</template>

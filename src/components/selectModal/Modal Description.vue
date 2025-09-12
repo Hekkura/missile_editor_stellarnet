@@ -3,4 +3,6 @@ import { ref } from 'vue'
 
 const toggle = () => {}
 </script>
-<template></template>
+<template>
+  <div></div>
+</template>
