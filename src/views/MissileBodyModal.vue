@@ -14,7 +14,9 @@ const activeMissileBody = ref<MissileBody | null>(null)
 
 <template>
   <div>TESTING</div>
-  <div class="flex flex-col gap-0.5">
+  <div
+    class="flex flex-col gap-0.5 max-h-[80vh] max-w-[70vw] min-w-[720px] align-middle justify-center"
+  >
     <OrangeHeader>Select Missile Body</OrangeHeader>
 
     <div id="outer-box" class="border-2 border-neutral-500 p-1 flex flex-row gap-2">
@@ -81,7 +83,7 @@ const activeMissileBody = ref<MissileBody | null>(null)
                   v-if="activeMissileBody.fixedSocketCostMult !== 1"
                   class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                 >
-                  <h1 class="font-neb">Fixed Socket Cost Multiplier</h1>
+                  <h1 class="font-neb">Uniform Socket Cost Multiplier</h1>
                   <p class="font-aces">{{ activeMissileBody.fixedSocketCostMult }}x</p>
                 </div>
                 <div
@@ -90,6 +92,13 @@ const activeMissileBody = ref<MissileBody | null>(null)
                 >
                   <h1 class="font-neb">Variable Socket Cost Multiplier</h1>
                   <p class="font-aces">{{ activeMissileBody.varSocketCostMult }}x</p>
+                </div>
+                <div
+                  v-if="activeMissileBody.warheadLock"
+                  class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
+                >
+                  <h1 class="font-neb">Warhead Locked?</h1>
+                  <p class="font-aces">{{ activeMissileBody.warheadLock }} Only</p>
                 </div>
               </div>
             </template>

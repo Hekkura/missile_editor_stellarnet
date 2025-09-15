@@ -21,6 +21,7 @@ export interface MissileBody {
   supportSlots: number
   multifunctionSlots: number
   warheadAsSupportSlot: 'Yes' | 'No' | 'Support Only'
+  warheadLock?: 'BF-EL' | 'BF' | 'No'
 
   loreBlurb: string
   factions: 'ANS' | 'OSP' | 'All'
