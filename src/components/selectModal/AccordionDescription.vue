@@ -40,10 +40,10 @@ const toggleAccordion = () => {
     <!-- Accordion COntent -->
     <div
       class="overflow-hidden transition-all duration-100 ease-in-out"
-      :class="isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+      :class="isOpen ? 'h-auto opacity-100' : 'max-h-0 h-0 opacity-0'"
     >
       <slot name="accordionContent"> </slot>
-      <br></br>
+      <br />
     </div>
     <!-- COntent End -->
   </div>
