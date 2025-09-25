@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, inject } from 'vue'
 
 //Define Item Type that can be inside the list
 //MUST have designation, name, and descriptionShort as keys.
@@ -11,6 +11,13 @@ import { defineProps, defineEmits } from 'vue'
 //   //Extra keys that doesn't matter
 //   [key: string]: any
 // }
+
+//inject modal controls
+const modal: any = inject('modal')
+
+const closeModal = () => {
+  modal.closeModal()
+}
 
 //Props
 const props = defineProps<{
@@ -33,31 +40,33 @@ const handleItemClick = (item: any) => {
 }
 </script>
 <template>
-  <div class="border-1 border-neutral-400 overflow-y-scroll">
+  <div class="border-1 border-neutral-400 scrollbar-custom overflow-y-scroll">
     <div
       v-for="listItem in props.listData"
       class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-800 border-neutral-500 border-[1.5px] text-neutral-300 hover:border-orange-500 hover:bg-neutral-900"
       @click="handleItemClick(listItem)"
       :class="{
-        'border-orange-500 bg-neutral-900': props.activeItem?.designation === listItem.designation,
+        'border-orange-500 bg-neutral-900':
+          props.activeItem?.info?.designation === listItem.info.designation,
       }"
     >
-      <h1 class="text-lg leading-none">{{ listItem.designation }} {{ listItem.name }}</h1>
-      <p class="font-aces text-sm tracking-tight leading-none opacity-70">
-        {{ listItem.descriptionShort }}
+      <h1 class="text-md leading-none">{{ listItem.info.designation }} {{ listItem.info.name }}</h1>
+      <p class="font-aces text-xs tracking-tight leading-none opacity-70">
+        {{ listItem.info.descriptionShort }}
       </p>
     </div>
   </div>
   <div>
     <!-- Save to Pinia state -->
     <button
-      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-neutral-500 border-[1.5px] text-lg text-neutral-300"
+      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-neutral-500 border-[1.5px] text-md text-neutral-300"
     >
       SELECT
     </button>
     <!-- Close modal -->
     <button
-      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-rose-800 border-[1.5px] text-lg text-rose-800"
+      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-rose-800 border-[1.5px] text-md text-rose-800"
+      @click="closeModal"
     >
       CANCEL
     </button>

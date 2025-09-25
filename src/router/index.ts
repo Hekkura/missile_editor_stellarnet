@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Main',
-      component: () => import('../views/MissileBodyModal.vue'),
+      component: () => import('../views/MissileEditorView.vue'),
     },
     // {
     //   path: '/about',

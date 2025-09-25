@@ -1,6 +1,30 @@
 @import './base.css';
 @import 'tailwindcss';
 
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 4px;
+    /* height: 8px; */
+    border: 2px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    @apply bg-neutral-900 border-1 border-neutral-500;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-neutral-400;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-500;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-corner {
+    @apply bg-neutral-100;
+  }
+}
+
 @font-face {
   font-family: 'Bombardier';
   font-style: normal;
@@ -16,9 +40,25 @@
   src: local('ACES07_Regular'), url('ACES07_Regular.ttf');
 }
 
+@font-face {
+  font-family: 'JetMono';
+  font-style: normal;
+  font-display: swap;
+  src: local('JetBrainsMono-Regular'), url('JetBrainsMono-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'JetMonoBold';
+  font-style: bold;
+  font-display: swap;
+  src: local('JetBrainsMono-Bold'), url('JetBrainsMono-Bold.ttf');
+}
+
 @theme {
   --font-neb: 'Bombardier', sans-serif;
   --font-aces: 'Aces07', sans-serif;
+  --font-jetmono: 'JetMono', mono;
+  --font-jetmonobold: 'JetMonoBold', mono;
   --yellow-pale: #e3dc98;
 }
 

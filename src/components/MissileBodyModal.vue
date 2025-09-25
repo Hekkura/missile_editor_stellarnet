@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 import SelectionList from '@/components/selectModal/SelectionList.vue'
-import OrangeHeader from '@/components/OrangeHeader.vue'
+import OrangeHeader from '@/components/headers/OrangeHeader.vue'
 import AccordionDescription from '@/components/selectModal/AccordionDescription.vue'
 
 import { missileBodyData } from '@/ts/MissileBodyData'
@@ -10,17 +10,44 @@ import type { MissileBody } from '@/types/Body'
 
 // Currently selected missile
 const activeMissileBody = ref<MissileBody | null>(null)
+
+//inject modal controls
+const modal: any = inject('modal')
+
+//close modal handler
+const closeModal = () => {
+  activeMissileBody.value = null
+  modal.closeModal()
+}
+
+const handleBackdropClick = () => {
+  closeModal()
+}
+
+const handleModalContentClick = (event: Event) => {
+  // Prevent backdrop click when clicking inside modal
+  event.stopPropagation()
+}
+
+const props = defineProps<{
+  isActive: boolean
+}>()
 </script>
 
 <template>
-  <div class="bg-neutral-800 bg-opacity-50 h-screen w-screen flex justify-center align-middle">
-    <!--  -->
-    <div
-      class="flex flex-col gap-0.5 max-h-[80vh] max-w-[70vw] min-w-[720px] align-middle justify-center"
-    >
+  <div
+    v-if="props.isActive"
+    @click="handleBackdropClick"
+    class="bg-neutral-800/50 h-screen w-screen flex justify-center align-center absolute left-0 top-0"
+  >
+    <div class="flex flex-col gap-0.5 w-[70vw] h-[90vh] min-w-[720px] align-middle justify-center">
       <OrangeHeader>Select Missile Body</OrangeHeader>
 
-      <div id="outer-box" class="border-2 border-neutral-500 p-1 flex flex-row gap-2 bg-gray-950">
+      <div
+        id="outer-box"
+        class="border-2 border-neutral-500 p-1 flex flex-row gap-2 bg-gray-950"
+        @click="handleModalContentClick"
+      >
         <div id="left-box" class="flex flex-col gap-2 flex-1 h-80">
           <!-- List Card Component-->
           <SelectionList
@@ -32,14 +59,16 @@ const activeMissileBody = ref<MissileBody | null>(null)
         </div>
 
         <!-- Missile Info Display -->
-        <div class="flex flex-col flex-1 gap-2 border-1 border-neutral-400 overflow-y-scroll h-80">
+        <div
+          class="flex flex-col flex-1 gap-2 border-1 border-neutral-400 scrollbar-custom overflow-y-scroll h-80"
+        >
           <div v-if="activeMissileBody" class="p-1">
             <!-- Main Title + Subtitle-->
 
             <h1 class="text-xl text-center leading-none">
-              {{ activeMissileBody.designation }} {{ activeMissileBody.name }}
+              {{ activeMissileBody.info.designation }} {{ activeMissileBody.info.name }}
             </h1>
-            <p class="text-xs text-center">{{ activeMissileBody.descriptionShort }}</p>
+            <p class="text-xs text-center">{{ activeMissileBody.info.descriptionShort }}</p>
             <!-- <img></img> -->
 
             <!-- Start dropdowns   -->
@@ -47,7 +76,7 @@ const activeMissileBody = ref<MissileBody | null>(null)
               <template #accordionTitle>DESCRIPTION </template>
               <template #accordionContent>
                 <p class="font-aces text-xs leading-3.5 tracking-tight whitespace-pre-line">
-                  {{ activeMissileBody.description }}
+                  {{ activeMissileBody.info.description }}
                 </p>
               </template>
             </AccordionDescription>
@@ -60,46 +89,46 @@ const activeMissileBody = ref<MissileBody | null>(null)
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Body Integrity</h1>
-                    <p class="font-aces">{{ activeMissileBody.baseHealth }}</p>
+                    <p class="font-aces">{{ activeMissileBody.physics.baseHealth }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Wall Thickness</h1>
-                    <p class="font-aces">{{ activeMissileBody.wallThickness }}cm</p>
+                    <p class="font-aces">{{ activeMissileBody.physics.wallThickness }}cm</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Size</h1>
-                    <p class="font-aces">{{ activeMissileBody.size }}</p>
+                    <p class="font-aces">{{ activeMissileBody.physics.size }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Socket Weight</h1>
-                    <p class="font-aces">{{ activeMissileBody.socketWeight }}x</p>
+                    <p class="font-aces">{{ activeMissileBody.physics.socketWeight }}x</p>
                   </div>
                   <div
-                    v-if="activeMissileBody.fixedSocketCostMult !== 1"
+                    v-if="activeMissileBody.economics.fixedSocketCostMult !== 1"
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Uniform Socket Cost Multiplier</h1>
-                    <p class="font-aces">{{ activeMissileBody.fixedSocketCostMult }}x</p>
+                    <p class="font-aces">{{ activeMissileBody.economics.fixedSocketCostMult }}x</p>
                   </div>
                   <div
-                    v-if="activeMissileBody.varSocketCostMult !== 1"
+                    v-if="activeMissileBody.economics.varSocketCostMult !== 1"
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Variable Socket Cost Multiplier</h1>
-                    <p class="font-aces">{{ activeMissileBody.varSocketCostMult }}x</p>
+                    <p class="font-aces">{{ activeMissileBody.economics.varSocketCostMult }}x</p>
                   </div>
                   <div
-                    v-if="activeMissileBody.warheadLock"
+                    v-if="activeMissileBody.sockets.warheadLock"
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Warhead Locked?</h1>
-                    <p class="font-aces">{{ activeMissileBody.warheadLock }} Only</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.warheadLock }} Only</p>
                   </div>
                 </div>
               </template>
@@ -114,56 +143,56 @@ const activeMissileBody = ref<MissileBody | null>(null)
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Total Socket Count</h1>
-                    <p class="font-aces">{{ activeMissileBody.totalSocketCount }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.totalSocketCount }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Max Engine Socket Count</h1>
-                    <p class="font-aces">{{ activeMissileBody.engineMaxSocketCount }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.engineMaxSocketCount }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Max Warhead Socket Count</h1>
-                    <p class="font-aces">{{ activeMissileBody.warheadMaxSocketCount }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.warheadMaxSocketCount }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Factions</h1>
-                    <p class="font-aces">{{ activeMissileBody.factions }}</p>
+                    <p class="font-aces">{{ activeMissileBody.info.factions }}</p>
                   </div>
                   <br />
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Base Missile Body Cost</h1>
-                    <p class="font-aces">{{ activeMissileBody.baseBodyCost }} Pts</p>
+                    <p class="font-aces">{{ activeMissileBody.economics.baseBodyCost }} Pts</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Seeker slots</h1>
-                    <p class="font-aces">{{ activeMissileBody.seekerSlots }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.seekerSlots }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Support Module Slots</h1>
-                    <p class="font-aces">{{ activeMissileBody.supportSlots }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.supportSlots }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Multifunction Slots</h1>
-                    <p class="font-aces">{{ activeMissileBody.multifunctionSlots }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.multifunctionSlots }}</p>
                   </div>
                   <div
                     class="flex justify-between w-full border-1 px-2 border-neutral-700 bg-neutral-800"
                   >
                     <h1 class="font-neb">Warhead as Support Module?</h1>
-                    <p class="font-aces">{{ activeMissileBody.warheadAsSupportSlot }}</p>
+                    <p class="font-aces">{{ activeMissileBody.sockets.warheadAsSupportSlot }}</p>
                   </div>
                 </div>
               </template>
@@ -176,7 +205,7 @@ const activeMissileBody = ref<MissileBody | null>(null)
                 <p
                   class="font-aces italic text-xs leading-3.5 tracking-tight text-yellow-300 whitespace-pre-line"
                 >
-                  {{ activeMissileBody.loreBlurb }}
+                  {{ activeMissileBody.info.loreBlurb }}
                 </p>
               </template>
             </AccordionDescription>
