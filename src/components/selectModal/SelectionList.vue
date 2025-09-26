@@ -1,20 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, inject } from 'vue'
 
-//Define Item Type that can be inside the list
-//MUST have designation, name, and descriptionShort as keys.
-//Note : just use type: any but data must have those 3 keys.
-// interface BaseListItem {
-//   designation: string
-//   name: string
-//   descriptionShort: string
-//   //Extra keys that doesn't matter
-//   [key: string]: any
-// }
-
-//inject modal controls
 const modal: any = inject('modal')
-
 const closeModal = () => {
   modal.closeModal()
 }
@@ -40,7 +27,7 @@ const handleItemClick = (item: any) => {
 }
 </script>
 <template>
-  <div class="border-1 border-neutral-400 scrollbar-custom overflow-y-scroll">
+  <div class="border-1 border-neutral-400 scrollbar-custom overflow-y-scroll flex-1">
     <div
       v-for="listItem in props.listData"
       class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-800 border-neutral-500 border-[1.5px] text-neutral-300 hover:border-orange-500 hover:bg-neutral-900"
@@ -55,20 +42,5 @@ const handleItemClick = (item: any) => {
         {{ listItem.info.descriptionShort }}
       </p>
     </div>
-  </div>
-  <div>
-    <!-- Save to Pinia state -->
-    <button
-      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-neutral-500 border-[1.5px] text-md text-neutral-300"
-    >
-      SELECT
-    </button>
-    <!-- Close modal -->
-    <button
-      class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-rose-800 border-[1.5px] text-md text-rose-800"
-      @click="closeModal"
-    >
-      CANCEL
-    </button>
   </div>
 </template>

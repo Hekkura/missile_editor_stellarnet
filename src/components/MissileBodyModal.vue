@@ -13,7 +13,6 @@ const activeMissileBody = ref<MissileBody | null>(null)
 
 //inject modal controls
 const modal: any = inject('modal')
-
 //close modal handler
 const closeModal = () => {
   activeMissileBody.value = null
@@ -29,6 +28,13 @@ const handleModalContentClick = (event: Event) => {
   event.stopPropagation()
 }
 
+const selectMissileBody = () => {
+  if (activeMissileBody.value) {
+    //TODO : Save to Pinia Store becomes active missile value and render activeMissileBody null
+    closeModal()
+  }
+}
+
 const props = defineProps<{
   isActive: boolean
 }>()
@@ -38,7 +44,7 @@ const props = defineProps<{
   <div
     v-if="props.isActive"
     @click="handleBackdropClick"
-    class="bg-neutral-800/50 h-screen w-screen flex justify-center align-center absolute left-0 top-0"
+    class="bg-neutral-800/50 h-screen w-screen flex justify-center align-center absolute left-0 top-0 z-50"
   >
     <div class="flex flex-col gap-0.5 w-[70vw] h-[90vh] min-w-[720px] align-middle justify-center">
       <OrangeHeader>Select Missile Body</OrangeHeader>
@@ -55,7 +61,24 @@ const props = defineProps<{
             :activeItem="activeMissileBody"
             @itemSelected="activeMissileBody = $event"
             @itemDeselected="activeMissileBody = null"
-          ></SelectionList>
+          />
+          <div>
+            <!-- Save to Pinia state -->
+            <button
+              :disabled="!activeMissileBody"
+              @click="selectMissileBody"
+              class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-neutral-500 border-[1.5px] text-md text-neutral-300 hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              SELECT
+            </button>
+            <!-- Close modal -->
+            <button
+              @click="closeModal"
+              class="w-full flex flex-col gap-1 px-1 py-1 bg-neutral-950 border-rose-800 border-[1.5px] text-md text-rose-800"
+            >
+              CANCEL
+            </button>
+          </div>
         </div>
 
         <!-- Missile Info Display -->

@@ -1,12 +1,7 @@
-export interface MissileSupModDesc {
+export interface MissileSupportModule {
   name: string
   cost: number
 
   desc: string
   stats: string
-}
-
-export interface MissileSupModShort {
-  name: string
-  cost: number
 }

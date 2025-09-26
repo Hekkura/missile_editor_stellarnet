@@ -1,6 +1,6 @@
 //Basic identification and metadata
 interface MissileBodyInfo {
-  designation: string
+  designation: string //Primary Key
   name: string
   descriptionShort: string
   description: string

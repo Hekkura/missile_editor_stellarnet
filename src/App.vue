@@ -6,6 +6,5 @@ import MissileBodyModal from './components/MissileBodyModal.vue'
 <template>
   <div class="bg-gray-950 h-screen w-screen font-neb text-gray-200 scrollbar-custom">
     <RouterView></RouterView>
-    <!-- <MissileBodyModal :isActive="true"></MissileBodyModal> -->
   </div>
 </template>
