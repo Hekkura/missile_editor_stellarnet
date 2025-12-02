@@ -4,8 +4,25 @@ import type { Engine } from '@/types/Engine'
 import type { MissileSupportModule } from '@/types/SupportModule'
 import type { MissileSeeker } from '@/types/Seeker'
 import type { Missile } from '@/types/Missile'
+import type { SlotType } from '@/types/MissileSlot'
+import { ref } from 'vue'
 
-export const useComponentStore = defineStore('components', {
+export const useMissileStore = defineStore('missileEditor', () => {
+  //State
+  const currentMissile = ref<Missile | null>(null)
+  const activeSlot = ref<SlotType | null>(null)
+  const storedMissiles = ref<Missile[]>([])
+
+  //Getters
+
+  //Actions
+
+  // state: () => ({
+  //   activeSlot: '' as string,
+  //   activeMissileData: {} as Missile,
+  //   storedMissilesData: [] as Missile[],
+  // }),
+
   //   state: (): {
   //     warheadsData: Warhead[]
   //     seekersData: Seeker[]

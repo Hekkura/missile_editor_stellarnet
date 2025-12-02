@@ -1,3 +1,12 @@
+export interface MissileSeeker {
+  id: string
+  info: SeekerInfo
+  cost: SeekerCost
+
+  specs: SeekerSpecs
+  capabilities: SeekerCapabilities
+}
+
 // Basic info
 interface SeekerInfo {
   name: string
@@ -27,6 +36,7 @@ interface SeekerSpecs {
 interface SeekerCapabilities {
   sigType: string
   isSteerable: 'Yes' | 'No'
+  steerAngle?: number
   isTrackTgt: 'Yes' | 'No'
   isPosTgt: 'Yes' | 'No'
   isSupportTrp: 'Yes' | 'No'
@@ -34,14 +44,6 @@ interface SeekerCapabilities {
   isMeasureVel: 'Yes' | 'No'
   isValMem: 'No' | number
   allAspectVal?: number
-}
-
-export interface MissileSeeker {
-  id: string
-  info: SeekerInfo
-  cost: SeekerCost
-  specs: SeekerSpecs
-  capabilities: SeekerCapabilities
 }
 
 // Configuration state / User settings in build.

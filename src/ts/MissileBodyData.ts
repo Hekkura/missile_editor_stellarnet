@@ -142,7 +142,7 @@ export const missileBodyData: MissileBody[] = [
       size: 2,
       baseHealth: 25,
       wallThickness: 0.05,
-      socketWeight: 0.75,
+      socketWeight: 1.25,
     },
     sockets: {
       totalSocketCount: 7,

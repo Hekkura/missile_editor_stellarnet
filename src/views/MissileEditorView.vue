@@ -3,6 +3,7 @@ import GrayHeader from '@/components/headers/GrayHeader.vue'
 import OrangeHeader from '@/components/headers/OrangeHeader.vue'
 import LeftPanel from '@/components/LeftPanel.vue'
 import MissileBodyModal from '@/components/MissileBodyModal.vue'
+import ComponentPalette from '@/components/ComponentPalette.vue'
 import { ref, provide, computed } from 'vue'
 
 const currentModal = ref<string | null>(null)
@@ -17,6 +18,7 @@ const closeModal = () => {
 
 const isModalOpen = (modalName: string) => {
   return computed(() => currentModal.value === modalName)
+  //returns boolean.
 }
 
 const modalControls = {
@@ -54,15 +56,10 @@ provide('modal', modalControls)
         >
           <GrayHeader>Component Palette</GrayHeader>
           <!-- Move this to component -->
-          <div class="border-1 border-neutral-400 flex flex-col bg-neutral-800">
-            <div class="flex flex-row border-b border-neutral-400">
-              <div class="border-r border-neutral-400 w-10 h-10"></div>
-              <div>
-                <div class="px-1">Command Receiver</div>
-                <div class="font-aces px-1 text-xs text-yellow-500">CMD</div>
-              </div>
-            </div>
+          <div class="w-full h-[95%] overflow-y-scroll scrollbar-scroll scrollbar-custom">
+            <ComponentPalette></ComponentPalette>
           </div>
+          <!--  -->
         </div>
       </div>
     </div>
